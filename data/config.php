@@ -18,5 +18,11 @@ return array(
     ),
     'cache' => array(
         'cache_dir' => '/data/cache',
+    ),
+    'import' => array(
+        'System' => array('Cache'),
+        'Developer' => array(
+            '/inc/test', # {ROOT}/inc/test.php
+        ),
     )
 );

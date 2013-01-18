@@ -30,7 +30,6 @@ class App
 
     public function run()
     {
-        $config = $this->config;
         $mod_file = __ROOT__ . $this->config['app']['module'] . "/{$this->module}.php";
         $module = $this->module . "Class";
         $action = $this->action . "Action";

@@ -28,6 +28,26 @@ class Model
         return $this->db->GetAll($table, $field, $where, $debug);
     }
 
+    public function GetRow($table, $fields, $where = '', $debug = false)
+    {
+        return $this->db->GetRow($table, $fields, $where, $debug);
+    }
+
+    public function Delete($table, $where, $safe = true, $commit = true, $debug = false)
+    {
+        return $this->db->Delete($table, $where, $safe, $commit, $debug);
+    }
+
+    public function UpdRow(Array $array, $where = '', $commit = true, $debug = false)
+    {
+        return $this->db->UpdRow($array, $where, $commit, $debug);
+    }
+
+    public function InsRow(Array $data, $commit = true, $debug = false)
+    {
+        return $this->db->InsRow($data, $commit, $debug);
+    }
+
     public function Query($sql)
     {
         return $this->db->Query($sql);
@@ -36,5 +56,10 @@ class Model
     public function ExeSql($sql)
     {
         return $this->db->ExeSql($sql);
+    }
+
+    public function InsMulRow(Array $array, $commit = true, $debug = false)
+    {
+        return $this->db->InsMulRow($array, $commit, $debug);
     }
 }

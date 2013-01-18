@@ -8,11 +8,12 @@ return array(
     'mysql' => array(
         'host' => '127.0.0.1',
         'user' => 'root',
-        'pwd' => '',
-        'database' => 't1',
-        'pre' => '',
+        'pwd' => 'hdd',
+        'database' => 'test',
+        'pre' => 'hdd_',
     ),
     'app' => array(
-        'module' => "/module"
-    )
+        'module' => "/module",
+        'language' => "zh-cn",
+    ),
 );

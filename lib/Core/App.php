@@ -10,19 +10,13 @@ class App
     public $db;
     public $module;
     public $action;
-    public $params;
+    public $params = array();
 
     public function __construct()
     {
         global $config;
         $this->config = $config;
-        if (isset($config['mysql']) && isset($config['mysql']['host']) && isset($config['mysql']['user']) && isset($config['mysql']['database'])) {
-            $this->db = new
-            DB($config['mysql']['host'], $config['mysql']['user'], $config['mysql']['pwd'], $config['mysql']['database']);
-            $this->init();
-        } else {
-            $this->showErr(DD::Lang("NO_MYSQL_CONFIG"));
-        }
+        $this->init();
     }
 
     private function init()
@@ -31,21 +25,19 @@ class App
             $this->config['app'] : array(
                 'module' => '/module'
             );
+        $this->dispatcher();
     }
 
     public function run()
     {
-    }
+        $config = $this->config;
+        $mod_file = __ROOT__ . $this->config['app']['module'] . "/{$this->module}.php";
+        $module = $this->module . "Class";
+        $action = $this->action . "Action";
 
-    private function dispatcher()
-    {
-        if (isset($_GET['module']) && !empty($_GET['module']) && isset($_GET['action']) && !empty($_GET['action'])) {
-            $this->module = empty($_GET['module']) ? "index" : $_GET['module'];
-            $this->action = $_GET['action'] ? "index" : $_GET['action'];
-            $mod_file = __ROOT__ . $this->config['app']['module'] . "/{$this->module}.php";
-            $module = $this->module . "Class";
-            $action = $this->action . "Action";
-            if (file_exists($mod_file) && class_exists($module)) {
+        if (file_exists($mod_file) && is_readable($mod_file)) {
+            require_once $mod_file;
+            if (class_exists($module)) {
                 $mod = new $module();
                 if (method_exists($mod, $action)) {
                     $mod->$action();
@@ -55,20 +47,40 @@ class App
             } else {
                 $this->NoPage(DD::Lang("NO_MODULE"));
             }
-            $params = isset($_GET['params']) ? $_GET['params'] : '';
-            if ($params) {
-
-            }
         } else {
-            //error
-            $this->NoPage(DD::Lang("NO_MODULE"));
+            $this->NoPage(DD::Lang("NO_MODULE_FILE"));
+        }
+
+
+    }
+
+    protected function dispatcher()
+    {
+        $this->module = isset($_GET['module']) && !empty($_GET['module']) ? trim($_GET['module']) : 'index';
+        $this->action = isset($_GET['action']) && !empty($_GET['action']) ? trim($_GET['action']) : 'index';
+        $params = isset($_GET['p']) && !empty($_GET['p']) ? trim($_GET['p'], ' /') : '';
+        if ($params) {
+            $par_arr = explode("/", $params);
+            foreach ($par_arr as $k => $v) {
+                if (!trim($v)) {
+                    unset($par_arr[$k]);
+                }
+            }
+            $p = array_chunk($par_arr, 2);
+            foreach ($p as $v) {
+                if (isset($v[1])) {
+                    $this->params[$v[0]] = $v[1];
+                } else {
+                    $this->params[$v[0]] = '';
+                }
+            }
         }
     }
 
     public static function NoPage($content = "")
     {
         header('HTTP/1.1 404 Not Found');
-        echo $content;
+        exit("404<hr>{$content}");
     }
 
     public function showErr($content)

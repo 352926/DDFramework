@@ -44,11 +44,27 @@ class DB
         $this->connect();
     }
 
-    public static function getInstance($host, $user, $pwd, $database, $pre, $charset = "UTF8", $pconnect = false)
+    public static function getInstance()
     {
-        $class = __CLASS__;
-        $db = new $class($host, $user, $pwd, $database, $pre, $charset, $pconnect);
-        return $db;
+        $mysql = DD::C("mysql");
+        if ($mysql) {
+            $class = __CLASS__;
+            $host = isset($mysql['host']) && !empty($mysql['host']) ? $mysql['host'] : '';
+            $user = isset($mysql['user']) && !empty($mysql['user']) ? $mysql['user'] : '';
+            $pwd = isset($mysql['pwd']) && !empty($mysql['pwd']) ? $mysql['pwd'] : '';
+            $database = isset($mysql['database']) && !empty($mysql['database']) ? $mysql['database'] : '';
+            $pre = isset($mysql['pre']) && !empty($mysql['pre']) ? $mysql['pre'] : '';
+            $charset = isset($mysql['charset']) && !empty($mysql['charset']) ? $mysql['charset'] : 'UTF8';
+            $pconnect = isset($mysql['pconnect']) && $mysql['pconnect'] ? true : false;
+            if ($host && $user && $database) {
+                $db = new $class($host, $user, $pwd, $database, $pre, $charset, $pconnect);
+                return $db;
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
     }
 
     private function connect()
@@ -72,7 +88,7 @@ class DB
 
     function __destruct()
     {
-        mysql_close() or die('MySQL ERROR: ' . mysql_error());
+        mysql_close($this->conn) or die('MySQL ERROR: ' . mysql_error());
     }
 
     /**

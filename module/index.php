@@ -21,6 +21,6 @@ class indexClass extends Module
         $db = new Model();
 //        $rs = $db->Query("Select * from hdd_tb1");
         $rs = $this->params;
-        print_r($rs);
+        print_r(get_included_files());
     }
 }

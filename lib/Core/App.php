@@ -30,10 +30,13 @@ class App
 
     public function run()
     {
-        $nowtime = time();
-        $mod_file = __ROOT__ . $this->config['app']['module'] . "/{$this->module}.php";
+        $mod_dir = DD::C('app.module');
+        if (substr($mod_dir, 0, 1) != '/') $mod_dir = "/{$mod_dir}";
+        $mod_file = __ROOT__ . $mod_dir . "/{$this->module}.php";
         $module = $this->module . "Class";
         $action = $this->action . "Action";
+
+        $this->AutoLoad();
 
         if (file_exists($mod_file) && is_readable($mod_file)) {
             require_once $mod_file;
@@ -72,6 +75,27 @@ class App
                     $this->params[$v[0]] = $v[1];
                 } else {
                     $this->params[$v[0]] = '';
+                }
+            }
+        }
+    }
+
+    private function AutoLoad()
+    {
+        $list = DD::C('import');
+        if ($list) {
+            if (isset($list['System']) && is_array($list['System'])) {
+                foreach ($list['System'] as $f) {
+                    if (file_exists(__ROOT__ . "/lib/Core/{$f}.php") && is_readable(__ROOT__ . "/lib/Core/{$f}.php"))
+                        require_once __ROOT__ . "/lib/Core/{$f}.php";
+                }
+            }
+            if (isset($list['Developer']) && is_array($list['Developer'])) {
+                foreach ($list['Developer'] as $f) {
+                    if (substr($f, 0, 1) != '/')
+                        $f = "/{$f}";
+                    if (file_exists(__ROOT__ . "{$f}.php") && is_readable(__ROOT__ . "{$f}.php"))
+                        require_once __ROOT__ . "{$f}.php";
                 }
             }
         }

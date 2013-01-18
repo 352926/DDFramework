@@ -8,7 +8,11 @@ class indexClass extends Module
 {
     function indexAction()
     {
-        echo 'haha';
+        echo 'Hello World!';
         echo "<hr><pre>";
+        $db = new Model();
+//        $rs = $db->Query("Select * from hdd_tb1");
+        $rs = $this->params;
+        print_r($rs);
     }
 }

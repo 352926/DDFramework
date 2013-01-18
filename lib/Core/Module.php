@@ -8,5 +8,6 @@ class Module extends App
 {
     public function __construct()
     {
+        parent::__construct();
     }
 }

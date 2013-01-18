@@ -18,11 +18,6 @@ class Model
         }
     }
 
-    public function get($title)
-    {
-        return $this->db->GetOne($this->name, $title, "id=16");
-    }
-
     public function GetAll(Array $arr, $debug = false)
     {
         return $this->db->GetAll($arr, $debug);

@@ -30,6 +30,7 @@ class App
 
     public function run()
     {
+        $nowtime = time();
         $mod_file = __ROOT__ . $this->config['app']['module'] . "/{$this->module}.php";
         $module = $this->module . "Class";
         $action = $this->action . "Action";

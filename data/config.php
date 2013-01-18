@@ -16,4 +16,7 @@ return array(
         'module' => "/module",
         'language' => "zh-cn",
     ),
+    'cache' => array(
+        'cache_dir' => '/data/cache',
+    )
 );

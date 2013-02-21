@@ -41,7 +41,7 @@ class DD
                     return $name;
                 }
             } else {
-                DD::ShowErr(500, "语言文件不存在或没有读取权限!");
+                DD::ShowErr("语言文件不存在或没有读取权限!");
             }
         } else {
             $f = __ROOT__ . "/lib/Lang/zh-cn.php";
@@ -53,7 +53,7 @@ class DD
                     return $name;
                 }
             } else {
-                DD::ShowErr(500, "语言文件不存在或没有读取权限!");
+                DD::ShowErr("语言文件不存在或没有读取权限!");
             }
         }
         return $name;

@@ -21,10 +21,10 @@ class DDCache
                 } elseif (mkdir(__ROOT__ . $cache_dir)) {
                     $this->CacheDir = __ROOT__ . $cache_dir;
                 } else {
-                    DD::ShowErr(500, DD::Lang("CANNOT_CREATE_CACHE_DIR"));
+                    DD::ShowErr(DD::Lang("CANNOT_CREATE_CACHE_DIR"));
                 }
             } else {
-                DD::ShowErr(500, DD::Lang("NO_DEFINED_CACHE_DIR"));
+                DD::ShowErr(DD::Lang("NO_DEFINED_CACHE_DIR"));
             }
         }
     }
@@ -42,7 +42,7 @@ class DDCache
             if ($rs) {
                 return true;
             } else {
-                DD::ShowErr(DD::Lang("FILE_WRITE_FAILED"));
+                DD::ShowErr(Lang("FILE_WRITE_FAILED"));
             }
         } else {
             return false;

@@ -8,7 +8,7 @@
 <div data-role="page" id="page1">
     <div data-theme="a" data-role="header">
         <h3>
-            <?php echo $website['title'];?>
+            这边也就这样子了
         </h3>
     </div>
     <div data-role="content">

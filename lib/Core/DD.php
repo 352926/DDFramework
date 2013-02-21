@@ -59,8 +59,53 @@ class DD
         return $name;
     }
 
-    public static function ShowErr($code = 500, $content = "")
+    /**
+     * @param $data
+     * @param $callback #可以用数组方式传递多个
+     */
+    public static function JsonEcho($data, $callback)
     {
-        exit($code . ' : ' . $content);
+        $rs = array(
+            'code' => 200,
+            'data' => $data,
+            'callback' => $callback
+        );
+        exit(json_encode($rs));
+    }
+
+    public static function JsonMsg($code, $msg, $url = '')
+    {
+        $rs = array(
+            'code' => $code,
+            'msg' => $msg,
+            'url' => $url
+        );
+        exit(json_encode($rs));
+    }
+
+    public static function ShowErr($content = "", $code = 500)
+    {
+        exit("错误码：{$code} <hr> {$content}<hr>请复制此日志ID，咨询管理员，谢谢");
+    }
+
+    public static function getModule()
+    {
+        return isset($_GET['module']) && !empty($_GET['module']) ? trim($_GET['module']) : 'index';
+    }
+
+    public static function getAction()
+    {
+        return isset($_GET['action']) && !empty($_GET['action']) ? trim($_GET['action']) : 'index';
+    }
+
+    public static function import($name)
+    {
+        $str = explode(".", $name);
+        $file = "";
+        foreach ($str as $p) {
+            if ($p) {
+                $file .= "/" . $p;
+            }
+        }
     }
 }

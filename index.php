@@ -9,4 +9,6 @@ define("__ROOT__", dirname(__FILE__));
 require(__ROOT__ . "/lib/Dingding.php");
 $app = new App();
 $app->run();
-print_r("<hr>" . str_replace("\n", "<BR>", file_get_contents(xdebug_stop_trace())));
+register_shutdown_function(function () {
+    print_r("<hr>" . str_replace("\n", "<BR>", file_get_contents(xdebug_stop_trace())));
+});

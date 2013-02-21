@@ -6,13 +6,11 @@
  */
 class Model
 {
-    private $db;
     private $name;
 
     function __construct($name = '')
     {
         $this->name = $name;
-//        $this->db = new DB();
     }
 
 }

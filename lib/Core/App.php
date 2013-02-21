@@ -4,10 +4,15 @@
  * Date: 13-1-17
  * Time: 19:41
  */
+$SS = session_start();
+$OB = ob_start();
+set_time_limit(0);
+mb_internal_encoding('UTF-8');
+date_default_timezone_set('PRC');
 class App
 {
     public $config;
-    public $db;
+    public $ajax;
     public $module;
     public $action;
     public $params = array();
@@ -30,6 +35,12 @@ class App
 
     public function run()
     {
+        if ($this->ajax) {
+            header('Content-Type:text/html;charset=UTF-8');
+            if (!isset($_SERVER['HTTP_REQUEST_TYPE']) || strtoupper($_SERVER['HTTP_REQUEST_TYPE']) != "AJAX") {
+//                exit("Forbidden");
+            }
+        }
         $mod_dir = DD::C('app.module');
         if (substr($mod_dir, 0, 1) != '/') $mod_dir = "/{$mod_dir}";
         $mod_file = __ROOT__ . $mod_dir . "/{$this->module}.php";
@@ -42,9 +53,13 @@ class App
             require_once $mod_file;
             if (class_exists($module)) {
                 $mod = new $module();
+                if (method_exists($mod, 'init')) {
+                    $mod->init();
+                }
                 if (method_exists($mod, $action)) {
                     $mod->$action();
                 } else {
+                    echo $mod_file . $action;
                     $this->NoPage(DD::Lang("NO_ACTION"));
                 }
             } else {
@@ -59,8 +74,8 @@ class App
 
     protected function dispatcher()
     {
-        $this->module = isset($_GET['module']) && !empty($_GET['module']) ? trim($_GET['module']) : 'index';
-        $this->action = isset($_GET['action']) && !empty($_GET['action']) ? trim($_GET['action']) : 'index';
+        $this->module = DD::getModule();
+        $this->action = DD::getAction();
         $params = isset($_GET['p']) && !empty($_GET['p']) ? trim($_GET['p'], ' /') : '';
         if ($params) {
             $par_arr = explode("/", $params);
@@ -101,10 +116,14 @@ class App
         }
     }
 
-    public static function NoPage($content = "")
+    public function NoPage($content = "")
     {
         header('HTTP/1.1 404 Not Found');
-        exit("404<hr>{$content}");
+        if ($this->ajax) {
+            DD::JsonMsg(400, $content);
+        } else {
+            exit("404<hr>{$content}");
+        }
     }
 
     public function showErr($content)

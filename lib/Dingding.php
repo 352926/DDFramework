@@ -15,5 +15,6 @@ $config = require __ROOT__ . "/data/config.php";
 require __ROOT__ . "/lib/Core/DD.php";
 require __ROOT__ . "/lib/Core/DB.php";
 require __ROOT__ . "/lib/Core/Model.php";
+require __ROOT__ . "/lib/Core/Tpl.php";
 require __ROOT__ . "/lib/Core/App.php";
 require __ROOT__ . "/lib/Core/Module.php";

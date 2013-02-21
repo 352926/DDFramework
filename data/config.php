@@ -24,6 +24,7 @@ return array(
         'System' => array('Cache'),
         'Developer' => array(
             '/inc/test', # {ROOT}/inc/test.php
+            '/wap/helper/Website', # {ROOT}/inc/test.php
         ),
     )
 );

@@ -4,7 +4,7 @@
  * Date: 13-1-18
  * Time: 下午3:42
  */
-class indexClass extends Module
+class indexClass extends Website
 {
     function init()
     {
@@ -13,6 +13,9 @@ class indexClass extends Module
 
     function indexAction()
     {
+//        echo "<pre>";
+//        print_r(get_included_files());exit;
+        $this->website['title'] .= " - 首页";
         $this->display('index');
     }
 }

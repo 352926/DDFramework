@@ -8,7 +8,7 @@
 <div data-role="page" id="page1">
     <div data-theme="a" data-role="header">
         <h3>
-            Header
+            <?php echo $website['title'];?>
         </h3>
     </div>
     <div data-role="content">
@@ -17,55 +17,55 @@
         </div>
         <div>
             <a href="" data-transition="none">
-                Link me to click me
+                马上去记账！
             </a>
         </div>
         <div class="ui-grid-c">
-            <div class="ui-block-a">
+            <div class="ui-block-a">a
             </div>
-            <div class="ui-block-b">
+            <div class="ui-block-b">b
             </div>
-            <div class="ui-block-c">
+            <div class="ui-block-c">c
             </div>
-            <div class="ui-block-d">
+            <div class="ui-block-d">d
             </div>
-            <div class="ui-block-a">
+            <div class="ui-block-a">e
             </div>
-            <div class="ui-block-b">
+            <div class="ui-block-b">f
             </div>
-            <div class="ui-block-c">
+            <div class="ui-block-c">g
             </div>
-            <div class="ui-block-d">
+            <div class="ui-block-d">h
             </div>
-            <div class="ui-block-a">
+            <div class="ui-block-a">i
             </div>
-            <div class="ui-block-b">
+            <div class="ui-block-b">j
             </div>
-            <div class="ui-block-c">
+            <div class="ui-block-c">k
             </div>
-            <div class="ui-block-d">
+            <div class="ui-block-d">l
             </div>
-            <div class="ui-block-a">
+            <div class="ui-block-a">m
             </div>
-            <div class="ui-block-b">
+            <div class="ui-block-b">n
             </div>
-            <div class="ui-block-c">
+            <div class="ui-block-c">o
             </div>
-            <div class="ui-block-d">
+            <div class="ui-block-d">p
             </div>
-            <div class="ui-block-a">
+            <div class="ui-block-a">q
             </div>
-            <div class="ui-block-b">
+            <div class="ui-block-b">r
             </div>
-            <div class="ui-block-c">
+            <div class="ui-block-c">s
             </div>
-            <div class="ui-block-d">
+            <div class="ui-block-d">t
             </div>
         </div>
     </div>
     <div data-theme="a" data-role="footer" data-position="fixed">
         <h3>
-            Footer
+            底部信息写什么好呢？
         </h3>
     </div>
 </div>

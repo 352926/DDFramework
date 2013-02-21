@@ -32,6 +32,7 @@ class Module
             $name = $this->action;
         }
         $tpl = new tpl($this->module, $this->action);
+        $tpl->assign('website', $this->website);
         if (!empty($this->assign)) {
             $var = array_merge($this->assign, $var);
         }
@@ -45,4 +46,5 @@ class Module
     {
         $this->assign[$name] = $value;
     }
+
 }

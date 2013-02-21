@@ -6,13 +6,13 @@
  */
 class memberClass extends Module
 {
-    public function init()
+    function init()
     {
-        //echo 'aa';
-        $this->layout = 'aaa';
+//        echo 'aa';
+        $this->layout = 'layout';
     }
 
-    public function loginAction()
+    function loginAction()
     {
         $username = isset($this->params['username']) ? $this->params['username'] : '';
         $password = isset($this->params['password']) ? $this->params['password'] : '';
@@ -80,12 +80,12 @@ class memberClass extends Module
             }
         } else {
             $this->assign('aa', '^_^');
-            $this->display('index',array('bb'=>'bb','cc'=>'cc'));
+            $this->display('index', array('bb' => 'bb', 'cc' => 'cc'));
         }
 //        print_r($salt);
     }
 
-    public function authAction()
+    function authAction()
     {
         if ($this->ajax) {
         }

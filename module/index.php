@@ -6,8 +6,13 @@
  */
 class indexClass extends Module
 {
+    function init()
+    {
+        $this->layout = 'layout';
+    }
+
     function indexAction()
     {
-        echo "这是网站首页";
+        $this->display('index');
     }
 }

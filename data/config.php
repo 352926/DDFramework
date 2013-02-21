@@ -9,11 +9,12 @@ return array(
         'host' => '127.0.0.1',
         'user' => 'root',
         'pwd' => 'hdd',
-        'database' => 'test',
-        'pre' => 'hdd_',
+        'database' => 'caiwu',
+        'pre' => 'dd_',
     ),
     'app' => array(
         'module' => "/module",
+        'template' => "/view",
         'language' => "zh-cn",
     ),
     'cache' => array(

@@ -31,40 +31,22 @@ class DB
      * @param bool $pconnect 永久链接/即时链接 默认即时链接
      * @param bool $tran 开启事务，需要MySQL支持InnoDB。
      */
-    function __construct($host, $user, $pwd, $database, $pre = "", $charset = "UTF8", $pconnect = false, $tran = false)
+    function __construct($config = array(), $pconnect = false, $tran = false)
     {
-        $this->host = $host;
-        $this->user = $user;
-        $this->pwd = $pwd;
-        $this->database = $database;
-        $this->pre = $pre;
+        //$host, $user, $pwd, $database, $pre = "", $charset = "UTF8"
+        if (empty($config)) {
+            $config = DD::C('mysql');
+            if (!$config) return false;
+        }
+        $this->host = isset($config['host']) ? $config['host'] : '';
+        $this->user = isset($config['user']) ? $config['user'] : '';
+        $this->pwd = isset($config['pwd']) ? $config['pwd'] : '';
+        $this->database = isset($config['database']) ? $config['database'] : '';
+        $this->pre = isset($config['pre']) ? $config['pre'] : '';
         $this->pconnect = $pconnect;
-        $this->charset = $charset;
+        $this->charset = isset($config['charset']) ? $config['charset'] : 'UTF8';
         $this->tran = $tran;
         $this->connect();
-    }
-
-    public static function getInstance()
-    {
-        $mysql = DD::C("mysql");
-        if ($mysql) {
-            $class = __CLASS__;
-            $host = isset($mysql['host']) && !empty($mysql['host']) ? $mysql['host'] : '';
-            $user = isset($mysql['user']) && !empty($mysql['user']) ? $mysql['user'] : '';
-            $pwd = isset($mysql['pwd']) && !empty($mysql['pwd']) ? $mysql['pwd'] : '';
-            $database = isset($mysql['database']) && !empty($mysql['database']) ? $mysql['database'] : '';
-            $pre = isset($mysql['pre']) && !empty($mysql['pre']) ? $mysql['pre'] : '';
-            $charset = isset($mysql['charset']) && !empty($mysql['charset']) ? $mysql['charset'] : 'UTF8';
-            $pconnect = isset($mysql['pconnect']) && $mysql['pconnect'] ? true : false;
-            if ($host && $user && $database) {
-                $db = new $class($host, $user, $pwd, $database, $pre, $charset, $pconnect);
-                return $db;
-            } else {
-                return false;
-            }
-        } else {
-            return false;
-        }
     }
 
     private function connect()

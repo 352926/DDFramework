@@ -16,7 +16,7 @@
             <img src="http://codiqa.com/static/images/v2/image.png" alt="image" style="position: absolute; top: 50%; left: 50%; margin-left: -16px; margin-top: -18px">
         </div>
         <div>
-            <a href="" data-transition="none">
+            <a href="http://erp.jz27.com/wap.php?mod=cost" data-transition="none" style="font-size: 14px;">
                 马上去记账！
             </a>
         </div>

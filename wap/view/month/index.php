@@ -7,11 +7,11 @@
 ?>
 <div data-role="content" style="padding:5px;">
     <div data-role="collapsible-set" data-theme="e" style="margin:0;">
-        <div data-role="fieldcontain" style="margin: 0;padding-bottom: 5px;">
-            <fieldset data-role="controlgroup">
-                <input name="" id="search" placeholder="" value="" type="search">
-            </fieldset>
-        </div>
+<!--        <div data-role="fieldcontain" style="margin: 0;padding-bottom: 5px;">-->
+<!--            <fieldset data-role="controlgroup">-->
+<!--                <input name="" id="search" placeholder="" value="" type="search">-->
+<!--            </fieldset>-->
+<!--        </div>-->
         <ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-divider-theme="d"
             data-icon="false" data-filter-placeholder="Search widgets..." data-global-nav="docs" class="jqm-list">
             <li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini">

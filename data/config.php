@@ -25,6 +25,7 @@ return array(
         'Developer' => array(
             '/inc/test', # {ROOT}/inc/test.php
             '/wap/helper/Website', # {ROOT}/inc/test.php
+            '/wap/helper/Common', # {ROOT}/inc/test.php
         ),
     )
 );

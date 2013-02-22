@@ -18,4 +18,11 @@ class indexClass extends Website
         $this->website['title'] .= " - 首页";
         $this->display('index');
     }
+
+    function testAction()
+    {
+//        echo date('w');
+        $rs = getWeek();
+        print_r($rs);
+    }
 }

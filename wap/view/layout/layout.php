@@ -17,6 +17,18 @@
     <link rel="stylesheet" type="text/css" href="/public/mobile/jquery.mobile-1.2.0.min.css"/>
 </head>
 <body>
-<?php $this->_include();?>
+<div data-theme="a" data-role="header">
+    <h3>
+        这边也就这样子了
+    </h3>
+</div>
+<div data-role="content">
+    <?php $this->_include();?>
+</div>
+<div data-theme="a" data-role="footer" data-position="fixed">
+    <h3>
+        底部信息写什么好呢？
+    </h3>
+</div>
 </body>
 </html>

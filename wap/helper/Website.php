@@ -14,6 +14,7 @@ class Website extends Module
 
     function __construct()
     {
+        parent::__construct();
         $this->assign('website', $this->website);
     }
 }

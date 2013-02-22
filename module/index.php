@@ -9,6 +9,7 @@ class indexClass extends Module
     function indexAction()
     {
         echo 'Hello World!';
+        $this->display('index');
 //        $ary = array(
 //            'aa' => 'bb'
 //        );

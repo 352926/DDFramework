@@ -10,9 +10,8 @@ class tpl
     private $assign = array();
 
     /**
-     * $name参数：模板文件名，不必包含后缀。
-     * $path参数：模板文件路径，注：模板必须在template目录下，这里不允许“../”转出template目录。<br>
-     * 例如：display('index','article/add') → 系统将解析 template/article/add/index.php 文件<br>
+     * $name参数：模板文件名，不必包含后缀。默认当前控制器的名称对应模板
+     * 例如：display('index') → 系统将解析 template/article/add/index.php 文件<br>
      * 当然$path参数中的 article可以改成其它，默认为当前Module名。
      */
     function __construct($module, $action)
@@ -31,18 +30,17 @@ class tpl
             $app['template'] = "/view";
         }
         $path = __ROOT__ . $app['template'] . '/' . $this->module . '/';
-        $this->file = realpath($path . $name . ".php");
+        $file = $path . $name . ".php";
+        if (!file_exists($path)) {
+            DD::ShowErr('目录不存在：' . $this->module);
+        }
+        if (!file_exists($file) || !is_file($file) || !is_readable($file)) {
+            DD::ShowErr('模板文件不存在或者不可读：' . $name);
+        }
+        $this->file = realpath($file);
         $this->path = dirname($this->file);
         $this->var = $var;
 
-        if (!file_exists($this->path)) {
-            DD::ShowErr('目录不存在：' . DD::C('app.template') . '/' . $this->module . '/');
-        }
-        if (!file_exists($this->file) || !is_file($this->file) || !is_readable($this->file)) {
-            DD::ShowErr('文件不存在或者不可读：' . DD::C('app.template') . '/' . $this->module . '/' . $name);
-        }
-
-        $this->assign(md5(__TIME__), $name);
         extract(array_merge($this->assign, $this->var)); //注册变量
         if (!empty($this->layout)) {
             $layout = __ROOT__ . $app['template'] . "/layout/" . $this->layout . ".php";
@@ -68,9 +66,7 @@ class tpl
         } else {
             $file = $this->path . "/" . $name . ".php";
         }
-//        exit($file);
         extract(array_merge($this->assign, $this->var)); //注册变量
-//        $tpath = empty($tpath) ? $this->tplpath : $this->tpl . $tpath;
         require_once $file;
     }
 

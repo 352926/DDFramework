@@ -22,7 +22,7 @@
         这边也就这样子了
     </h3>
 </div>
-<div data-role="content">
+<div data-role="content" style="padding:0;">
     <?php $this->_include();?>
 </div>
 <div data-theme="a" data-role="footer" data-position="fixed">

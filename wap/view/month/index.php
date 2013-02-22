@@ -5,7 +5,7 @@
  * Time: 上午10:44
  */
 ?>
-<div data-role="collapsible-set" data-theme="e" >
+<div data-role="collapsible-set" data-theme="e" style="margin:0;">
     <?php
     $i = 1;
     foreach ($weekList as $v):

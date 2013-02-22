@@ -21,9 +21,6 @@ class Module
         $this->module = $app->module;
         $this->action = $app->action;
         $this->params = $app->params;
-        if (!$this->ajax) {
-            header("Content-type:text/html;charset=UTF-8");
-        }
     }
 
     public function display($name = '', $var = array())

@@ -12,4 +12,8 @@ class Website extends Module
         "description" => "小丁子钱包管理",
     );
 
+    function __construct()
+    {
+        $this->assign('website', $this->website);
+    }
 }

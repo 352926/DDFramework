@@ -9,7 +9,14 @@ return array(
         'host' => '127.0.0.1',
         'user' => 'root',
         'pwd' => 'hdd',
-        'database' => 'caiwu',
+        'database' => 'ciweishop',
+        'pre' => 'dd_',
+    ),
+    'slaver' => array(
+        'host' => '127.0.0.1',
+        'user' => 'root',
+        'pwd' => 'hdd',
+        'database' => 'ciweishop',
         'pre' => 'dd_',
     ),
     'app' => array(
